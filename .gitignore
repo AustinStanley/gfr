@@ -1,2 +1,6 @@
 node_modules
 typings
+*.js
+*.map
+app/fonts
+app/css/bootstrap*
