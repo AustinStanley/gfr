@@ -8,7 +8,7 @@ import {Image} from './image.interface';
 
       <ul class="slides">
 
-        <li *ngFor="#image of images">
+        <li *ngFor="let image of images">
           <img src="{{image.url}}" alt="">
         </li>
 
@@ -70,9 +70,9 @@ export class CarouselComponent {
 }
 
 var IMAGES: Image[] = [
-    {url: 'http://placehold.it/1900x1080&text=Slide One'},
-    {url: 'http://placehold.it/1900x1080&text=Slide Two'},
-    {url: 'http://placehold.it/1900x1080&text=Slide Three'},
-    {url: 'http://placehold.it/1900x1080&text=Slide Four'},
-    {url: 'http://placehold.it/1900x1080&text=Slide Five'}
+    {url: 'http://lorempixel.com/1900/500?random=1'},
+    {url: 'http://lorempixel.com/1900/500?random=2'},
+    {url: 'http://lorempixel.com/1900/500?random=3'},
+    {url: 'http://lorempixel.com/1900/500?random=4'},
+    {url: 'http://lorempixel.com/1900/500?random=5'}
 ];

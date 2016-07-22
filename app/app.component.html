@@ -14,13 +14,27 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
+                <li *ngIf="isLoggedIn()">
+                    <a [routerLink]="['/family-tree']">Dashboard</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/family-tree']">Gallery</a>
+                </li>
                 <li>
                     <a [routerLink]="['/family-tree']">Family Tree</a>
                 </li>
-            </ul>
-            <ul class="nav navbar-nav" style="float: right">
                 <li>
-                    <a data-toggle="modal" data-target="#login" href="javascript:void(0);">Login</a>
+                    <a [routerLink]="['/family-tree']">Contact</a>
+                </li>
+            </ul>
+            <ul *ngIf="!isLoggedIn()" class="nav navbar-nav" style="float: right">
+                <li>
+                    <a (click)="clearCredentials()" data-toggle="modal" data-target="#login" href="javascript:void(0);">Login</a>
+                </li>
+            </ul>
+            <ul *ngIf="isLoggedIn()" class="nav navbar-nav" style="float: right">
+                <li>
+                    <a (click)="logout()" href="javascript:void(0);">Logout</a>
                 </li>
             </ul>
         </div>
@@ -31,7 +45,7 @@
 
 
 <!-- Page Content -->
-<div class="container" style="width: 100%;">
+<div class="container" id="container-main">
 
     <router-outlet></router-outlet>
 
@@ -45,20 +59,21 @@
             <h4 class="modal-title">Login</h4>
           </div>
           <div class="modal-body">
-            <form>
+            <form id="login-form">
                 <div class="form-group">
                     <label for="username" class="form-control-label">Username</label>
-                    <input type="text" class="form-control" id="username">
+                    <input [(ngModel)]="user.username" (ngModelChange)="clearError()" type="text" class="form-control" id="username">
                 </div>
                 <div class="form-group">
                     <label for="passwd" class="form-control-label">Password</label>
-                    <input type="password" class="form-control" id="passwd">
+                    <input [(ngModel)]="user.password" (ngModelChange)="clearError()" type="password" class="form-control" id="passwd">
                 </div>
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Submit</button>
+            <span class="error-msg"><small>{{errorMsg}}</small></span>
+            <button (click)="clearError()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button (click)="login()" type="submit" form="login-form" class="btn btn-primary">Submit</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
